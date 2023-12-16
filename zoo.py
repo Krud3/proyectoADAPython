@@ -1,9 +1,9 @@
-from animales import Animal
-from arbolbinario import BinaryTree
-from escena import Escena
-from linkedlist import LinkedList
-from parte import Parte
-from rojinegro import RBTree
+from objetos.animales import Animal
+from estructuras.arbolbinario import BinaryTree
+from objetos.escena import Escena
+from estructuras.linkedlist import LinkedList
+from objetos.parte import Parte
+from estructuras.rojinegro import RBTree
 
 def main():
 
