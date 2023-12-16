@@ -247,10 +247,31 @@ class RBTree():
     def __printCall(self, node, values):
         if node != self.NULL:
             self.__printCall(node.left, values)
-            values.append(str(node.val))
+            values.append(str(node.val.get_value()))
             self.__printCall(node.right, values)
 
     def print_tree(self):
         values = []
         self.__printCall(self.root, values)
         print(", ".join(values))
+
+    def get_grandeza(self):
+        return self._sumar_grandezas_recursivo(self.root)
+
+    def _sumar_grandezas_recursivo(self, node):
+        if node == self.NULL:
+            return 0
+        return (node.val.get_grandeza() +
+                self._sumar_grandezas_recursivo(node.left) +
+                self._sumar_grandezas_recursivo(node.right))
+    
+    def get_value(self):
+        values = []
+        self._concatenate_values(self.root, values)
+        return ", ".join(values)
+
+    def _concatenate_values(self, node, values):
+        if node != self.NULL:
+            self._concatenate_values(node.left, values)
+            values.append(str(node.val.get_value()))
+            self._concatenate_values(node.right, values)
