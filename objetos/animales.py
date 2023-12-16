@@ -10,10 +10,10 @@ class Animal:
         self.nombre = self.nombreRandom()
         self.grandeza = grandeza
 
-    def obtener_nombre(self):
+    def get_value(self):
         return self.nombre
     
-    def obtener_grandeza(self):
+    def get_grandeza(self):
         return self.grandeza
     
     
