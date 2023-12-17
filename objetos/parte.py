@@ -1,6 +1,6 @@
-from ..estructuras.arbolbinario import BinaryTree
-from ..estructuras.linkedlist import LinkedList
-from ..estructuras.rojinegro import RBTree
+from estructuras.arbolbinario import BinaryTree
+from estructuras.linkedlist import LinkedList
+from estructuras.rojinegro import RBTree
 
 class Parte:
     def __init__(self, estructura_datos):
@@ -10,17 +10,10 @@ class Parte:
         self.estructura_datos.append(escena)
 
     def get_value(self):
-        if isinstance(self.estructura_datos, BinaryTree):
-            return self.estructura_datos.get_value()
-        
-        elif isinstance(self.estructura_datos, LinkedList):
-            nombres = []
-            for escena in self.estructura_datos:
-                nombres.append(escena.data.get_value())
-            nombres
+        return self.estructura_datos.get_value()
 
-        else :
-            return self.estructura_datos.get_value()
+    def get_animal_mas_menos_repetido(self):
+        return self.estructura_datos.get_animal_mas_repetido()
     
     def get_grandeza(self):
         if isinstance(self.estructura_datos, BinaryTree):
@@ -35,3 +28,8 @@ class Parte:
         
         else :
             return self.estructura_datos.get_grandeza()
+        
+    def __lt__(self, other):
+        if not isinstance(other, Parte):
+            return NotImplemented
+        return self.get_grandeza() < other.get_grandeza()    

@@ -42,7 +42,7 @@ class BinaryTree:
     def get_value(self):
         values = []
         self._get_tree_values_recursive(self.root, values)
-        return ", ".join(map(str, values))
+        return (values)
 
     def _get_tree_values_recursive(self, current_node, values):
         if current_node is not None:
@@ -60,3 +60,17 @@ class BinaryTree:
         return (current_node.value.get_grandeza() +
                 self._sumar_grandeza_recursivo(current_node.left) +
                 self._sumar_grandeza_recursivo(current_node.right))
+    
+    def find(self, value_to_find):
+        return self._find_value_recursive(self.root, value_to_find)
+
+    def _find_value_recursive(self, current_node, value_to_find):
+        if current_node is None:
+            return False
+
+        if current_node.value.get_grandeza() == value_to_find.get_grandeza():
+            return True
+        elif value_to_find.get_grandeza() < current_node.value.get_grandeza():
+            return self._find_value_recursive(current_node.left, value_to_find)
+        else:
+            return self._find_value_recursive(current_node.right, value_to_find)

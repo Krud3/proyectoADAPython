@@ -268,10 +268,24 @@ class RBTree():
     def get_value(self):
         values = []
         self._concatenate_values(self.root, values)
-        return ", ".join(values)
+        return values
 
     def _concatenate_values(self, node, values):
         if node != self.NULL:
             self._concatenate_values(node.left, values)
-            values.append(str(node.val.get_value()))
+            values.append(node.val.get_value())
             self._concatenate_values(node.right, values)
+
+    def find(self, value_to_find):
+        return self._find_value(self.root, value_to_find)
+
+    def _find_value(self, node, value_to_find):
+        if node == self.NULL:
+            return False
+
+        if node.val.get_grandeza() == value_to_find.get_grandeza():
+            return True
+        elif value_to_find.get_grandeza() < node.val.get_grandeza():
+            return self._find_value(node.left, value_to_find)
+        else:
+            return self._find_value(node.right, value_to_find)

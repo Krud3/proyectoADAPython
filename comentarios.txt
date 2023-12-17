@@ -1,0 +1,1 @@
+configurar bien la creacion de escenas (tener cuidado no hay tipado poner mucha logica)
