@@ -116,7 +116,7 @@ class LinkedList:
         if b is None:
             return a
 
-        if a.data <= b.data:
+        if a.data.get_grandeza() <= b.data.get_grandeza():
             result = a
             result.next = self._sorted_merge(a.next, b)
         else:

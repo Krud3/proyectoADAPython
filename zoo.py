@@ -8,16 +8,18 @@ import random
 import time
 
 def main():
-
     
     #prueba_get_value_ll()
     #prueba_get_value_RB()
     #prueba_get_value_BT()
-    prueba_escena_menor_mayor()
-    '''
+    #prueba_escena_menor_mayor()
+    
     n = 9
     m = 4
     k = 3
+    crearMundo(n,m,k)
+
+def mundoOrdenado(n,m,k):
     print("n: ", n, "m: ", m, "k: ", k)
     estructura = LinkedList()
     evento = crearEvento(n,m,k,estructura)
@@ -59,11 +61,47 @@ def main():
             print("Parte: ",iterator, parte)
         iterator = iterator + 1
 
-    #evento.get_value_counts()
+def crearMundo(n,m,k):
+    print("n: ", n, "m: ", m, "k: ", k)
+    estructura = LinkedList()
+    evento = crearEvento(n,m,k,estructura)
+    ls = evento.get_value()
+    iterator = 0
+    for parte in ls:
+        if iterator == 0:
+            print("Apertura: ", parte)
+        else:
 
-    #print("Evento: ", evento.get_value())
-    '''
+            print("Parte: ",iterator, parte)
+        iterator = iterator + 1
 
+    print("n: ", n, "m: ", m, "k: ", k)
+    estructura = RBTree()
+    evento = crearEvento(n,m,k,estructura)
+    ls = evento.get_value()
+    iterator = 0
+    for parte in ls:
+        if iterator == 0:
+            print("Apertura: ", parte)
+        else:
+
+            print("Parte: ",iterator, parte)
+        iterator = iterator + 1
+
+    print("n: ", n, "m: ", m, "k: ", k)
+    estructura = BinaryTree()
+    evento = crearEvento(n,m,k,estructura)
+    ls = evento.get_value()
+    ls.reverse()
+    iterator = 0
+    for parte in ls:
+        if iterator == 0:
+            print("Apertura: ", parte)
+            print("Escena de menor grandeza es:", parte[0])
+            print("Escena de mayor grandeza es:", parte[-1])
+        else:
+            print("Parte: ",iterator, parte)
+        iterator = iterator + 1
 
 def crearEvento(n,m,k,estructura):
     la_estructura = None
@@ -78,22 +116,24 @@ def crearEvento(n,m,k,estructura):
     estructura2 = la_estructura
     lista_animales = LinkedList()
     crearAnimales(n,lista_animales)
-    nombres = []
 
     for animal in lista_animales:
-        nombres.append(animal.get_value())
-        nombres.append(animal.get_grandeza())
-        #print(animal.get_value(), animal.get_grandeza())
+        print(animal.get_value(), animal.get_grandeza())
     
     lista_animales.shuffle()
 
     las_escenas = crearEscenas(m,k,lista_animales,estructura1)
     escenas_estructura = las_escenas[0]
+    #inicio = time.time_ns()
     prom = escenas_estructura.get_grandeza()/((m-1)*k)
-    #print("promedio grandeza de las escenas: ", prom)
+    #fin = time.time_ns()
+    #tiempo_milisegundos = (fin-inicio)/10**6
+    #print("Tiempo: ", tiempo_milisegundos)
+    print("promedio grandeza de las escenas: ", prom)
     escenas_to_shufle = las_escenas[1]
     #print("Escenas to shuffle: ", escenas_to_shufle.get_value() )
-
+    if isinstance(escenas_estructura, LinkedList):
+        escenas_estructura.merge_sort()
     la_apertura = crearApertura(escenas_estructura)
     partes = crearPartes(m,k,escenas_to_shufle,estructura2,la_apertura)
     return partes
@@ -179,6 +219,7 @@ def prueba_get_value_ll():
         fin = time.time_ns()
         tiempo_milisegundos = (fin-inicio)/10**6
         print("i", i, "n: ",n, "m:", m, "k",k,"Tiempo: ", tiempo_milisegundos)
+        print(m)
         n = n+2
         m = int(n/2)
         k = int(m-1)
@@ -244,6 +285,8 @@ def prueba_escena_menor_mayor():
         n = n+2
         m = int(n/2)
         k = int(m-1)
+
+
 
 if __name__ == "__main__":
     main()
